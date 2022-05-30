@@ -40,7 +40,7 @@ async def create_user(user: user_schema.UserCreate):
     salt = get_random_string()
     hashed_password = hash_password(user.password, salt)
     query = users_table.insert().values(
-        email=user.email, user_name=user.name, password=f"{salt}${hashed_password}"
+        email=user.email, name=user.name, password=f"{salt}${hashed_password}"
     )
     user_id = await database.execute(query)
     return {**user.dict(), "id": user_id}
