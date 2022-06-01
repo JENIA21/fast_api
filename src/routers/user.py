@@ -24,7 +24,7 @@ async def auth(format_data: OAuth2PasswordRequestForm = Depends()):
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail='Wrong e-mail or password')
     if not users_utils.validate_password(password=format_data.password, hashed_password=user['password']):
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail='Wrong e-mail or password')
-    return await users_utils.create_user()
+
 
 
 @router.get('/users/me', response_model=users.UserBase)
